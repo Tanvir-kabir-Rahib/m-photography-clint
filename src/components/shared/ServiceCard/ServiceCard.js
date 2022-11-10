@@ -4,12 +4,13 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 const ServiceCard = ({ service }) => {
     return (
         <div className='flex align-middle justify-center'>
-            <div className="card w-96 bg-neutral">
+            <div className="card w-11/12 md:w-96 lg:w-96 bg-neutral">
                 <figure><PhotoProvider>
-                    <div className="foo">
+                    <div className="w-full">
                         <PhotoView src={service.img_url}>
-                            <img src={service.img_url} alt="" />
+                            <img className='w-full h-64' src={service.img_url} alt="" />
                         </PhotoView>
+
                     </div>
                 </PhotoProvider></figure>
                 <div className="card-body">

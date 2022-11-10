@@ -9,7 +9,7 @@ const Banners = () => {
         .then(data => setBanners(data))
     },[])
     return (
-        <div className="carousel w-3/4 mx-auto my-24">
+        <div className="carousel w-11/12 lg:w-3/4 mx-auto my-24">
             {
             banners.map(banner => <Banner key={banner._id} banner={banner}></Banner>)
             }
