@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Login = () => {
+    const {login, googleLogin} = useContext(AuthContext)
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+        .then(result => {
+            console.log(result.user)
+        })
+        .catch(error => console.error(error))
+    }
     return (
-        <div className="hero">
+        <form className="hero">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left w-1/2">
                     <h1 className="text-5xl font-bold">Login now!</h1>
@@ -29,13 +40,16 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Login</button>
                         </div>
+                        <div className="form-control mt-6">
+                            <button className="btn btn-outline btn-primary" onClick={handleGoogleLogin}><FaGoogle className='text-2xl mr-3'></FaGoogle><span>Login with google</span></button>
+                        </div>
                         <div>
                             <p>New to Mohammads Photograpy? <Link to='/signup' className='btn btn-link'>Sign Up</Link></p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     );
 };
 

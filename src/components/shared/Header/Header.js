@@ -7,7 +7,7 @@ import "./Header.css"
 const Header = () => {
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-neutral lg:py-4">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -17,7 +17,7 @@ const Header = () => {
                             
                         </ul>
                     </div>
-                    <Link to="/" className="btn btn-ghost normal-case text-xl"><img className='logo-img' src={logo} alt=""/></Link>
+                    <Link to="/" className="btn btn-ghost normal-case text-xl"><img className='logo-img' src={logo} alt=""/> Mohammads Photograpy</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
