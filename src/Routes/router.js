@@ -1,4 +1,5 @@
 import Main from "../components/layouts/Main";
+import AllServices from "../components/pages/AllServices/AllServices";
 import Home from "../components/pages/HomePage/Home/Home";
 import Login from "../components/pages/Login/Login";
 import SignUp from "../components/pages/SignUp/SignUp";
@@ -17,6 +18,14 @@ export const routes = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login></Login>
+            },
+            {
+                path:"/signup",
+                element:<SignUp></SignUp>
+            },
+            {
+                path:"/services",
+                element:<AllServices></AllServices>
             },
             {
                 path:"/signup",

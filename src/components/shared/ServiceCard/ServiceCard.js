@@ -3,7 +3,7 @@ import React from 'react';
 const ServiceCard = ({ service }) => {
     return (
         <div className='flex align-middle justify-center'>
-            <div className="card w-96 bg-neutral shadow-xl">
+            <div className="card w-96 bg-neutral">
                 <figure><img className='w-full h-64' src={service.img_url} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{service.title}</h2>
