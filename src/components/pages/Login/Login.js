@@ -4,17 +4,29 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Login = () => {
-    const {login, googleLogin} = useContext(AuthContext)
+    const { login, googleLogin } = useContext(AuthContext)
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        login(email, password)
+        .then(result => {
+            console.log(result.user)
+            form.reset()
+        })
+        .then(error => console.error(error))
+    }
 
     const handleGoogleLogin = () => {
         googleLogin()
-        .then(result => {
-            console.log(result.user)
-        })
-        .catch(error => console.error(error))
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => console.error(error))
     }
     return (
-        <form className="hero">
+        <form onSubmit={handleLogin} className="hero">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left w-1/2">
                     <h1 className="text-5xl font-bold">Login now!</h1>
