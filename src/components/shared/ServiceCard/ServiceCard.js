@@ -1,10 +1,17 @@
 import React from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const ServiceCard = ({ service }) => {
     return (
         <div className='flex align-middle justify-center'>
             <div className="card w-96 bg-neutral">
-                <figure><img className='w-full h-64' src={service.img_url} alt="Shoes" /></figure>
+                <figure><PhotoProvider>
+                    <div className="foo">
+                        <PhotoView src={service.img_url}>
+                            <img src={service.img_url} alt="" />
+                        </PhotoView>
+                    </div>
+                </PhotoProvider></figure>
                 <div className="card-body">
                     <h2 className="card-title">{service.title}</h2>
                     <p>{service.details.slice(0, 100)}...</p>
