@@ -7,7 +7,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 const SignUp = () => {
     const { googleLogin, createUser, updateUser } = useContext(AuthContext)
     const [err, setErr] = useState(null)
-    const nevigate = useNavigate()
+    const navigate = useNavigate()
     const handleSubmit = (event) => {
         event.preventDefault();
         setErr(null)
@@ -20,8 +20,8 @@ const SignUp = () => {
             .then(result => {
                 form.reset()
                 handleUpdateUser(name, photoURL)
-                nevigate("/")
-                toast.success("Successfully Registered.")
+                toast.success("Successfully Signed Up.")
+                navigate("/")
             })
             .catch(error => setErr(error.message))
     }
@@ -37,51 +37,54 @@ const SignUp = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
-                console.log(result.user)
+                toast.success("Successfully Signed Up.")
+                navigate("/")
             })
-            .catch(error => console.error(error))
+            .catch(error => setErr(error.message))
     }
     return (
-        <form onSubmit={handleSubmit} className="hero">
-            <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero">
+            <div className="hero-content flex-col lg:flex-row">
                 <div className="text-center lg:text-left w-1/2">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                    <p className="py-6">Please login to Mohammads Photograpy to book a service or leave a review. And enjoy the exciting features of Mohammads Photograpy</p>
+                    <h1 className="text-5xl font-bold">Sign Up!</h1>
+                    <p className="py-6">Sign Up to Mohammads Photograpy to book a service or leave a review. And enjoy the exciting features of Mohammads Photograpy</p>
                 </div>
                 <div className="card shadow-2xl w-1/2">
                     <div className="card-body">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text text-2xl">Name</span>
-                            </label>
-                            <input type="text" name='name' placeholder="Photo Url" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text text-2xl">Photo Url</span>
-                            </label>
-                            <input type="text" name='photoURL' placeholder="Photo Url" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text text-2xl">Email</span>
-                            </label>
-                            <input type="email" name='email' placeholder="email" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text text-2xl">Password</span>
-                            </label>
-                            <input type="password" name='password' placeholder="password" className="input input-bordered" />
-                            <label className={err ? "label text-red-700" : "hidden"}>
-                                {err}
-                            </label>
-                        </div>
+                        <form  onSubmit={handleSubmit}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text text-2xl">Name</span>
+                                </label>
+                                <input type="text" name='name' placeholder="Photo Url" className="input input-bordered" required/>
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text text-2xl">Photo Url</span>
+                                </label>
+                                <input type="text" name='photoURL' placeholder="Photo Url" className="input input-bordered" required/>
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text text-2xl">Email</span>
+                                </label>
+                                <input type="email" name='email' placeholder="email" className="input input-bordered" required/>
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text text-2xl">Password</span>
+                                </label>
+                                <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
+                                <label className={err ? "label text-red-700" : "hidden"}>
+                                    {err}
+                                </label>
+                            </div>
+                            <div className="form-control mt-6">
+                                <button className="btn btn-primary" type='submit'>Sign Up</button>
+                            </div>
+                        </form>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Sign Up</button>
-                        </div>
-                        <div className="form-control mt-6">
-                            <button className="btn btn-outline btn-primary" onClick={handleGoogleLogin}><FaGoogle className='text-2xl mr-3'></FaGoogle><span>Login with google</span></button>
+                            <button className="btn btn-outline btn-primary" onClick={handleGoogleLogin}><FaGoogle className='text-2xl mr-3'></FaGoogle><span>Sign Up with google</span></button>
                         </div>
                         <div>
                             <p>Already have an account? <Link to='/login' className='btn btn-link'>Login</Link></p>
@@ -89,7 +92,7 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     );
 };
 
