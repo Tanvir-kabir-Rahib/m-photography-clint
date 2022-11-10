@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { FaArrowRight, FaGoogle, FaUserAlt } from 'react-icons/fa';
+import { Link, NavLink } from 'react-router-dom';
+import { FaArrowRight, FaUserAlt } from 'react-icons/fa';
 import logo from '../../../assets/pictures/camera-logo.png'
 import "./Header.css"
 import { AuthContext } from '../../../contexts/AuthProvider';
@@ -24,13 +24,21 @@ const Header = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            <li className='text-lg mx-4'>Services</li>
-                            <li className='text-lg mx-4'>Blogs</li>
+                            <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                                isActive ? "btn btn-link" : ""
+                            } to="/services">Services</NavLink></li>
+                            <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                                isActive ? "btn btn-link" : ""
+                            } to="/blogs">Blogs</NavLink></li>
                             {
                                 user?.uid ?
                                     <>
-                                        <li className='text-lg mx-4'>My Reviews</li>
-                                        <li className='text-lg mx-4'>Add Services</li>
+                                        <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                                            isActive ? "btn btn-link" : ""
+                                        } to="/my_reviews">My Reviews</NavLink></li>
+                                        <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                                            isActive ? "btn btn-link" : ""
+                                        } to="/add_services">Add Services</NavLink></li>
                                     </>
                                     :
                                     <></>
@@ -41,13 +49,21 @@ const Header = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
-                        <li className='text-lg mx-4'>Services</li>
-                        <li className='text-lg mx-4'>Blogs</li>
+                        <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                            isActive ? "btn btn-link" : ""
+                        } to="/services">Services</NavLink></li>
+                        <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                            isActive ? "btn btn-link" : ""
+                        } to="/blogs">Blogs</NavLink></li>
                         {
                             user?.uid ?
                                 <>
-                                    <li className='text-lg mx-4'>My Reviews</li>
-                                    <li className='text-lg mx-4'>Add Services</li>
+                                    <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                                        isActive ? "btn btn-link" : ""
+                                    } to="/my_reviews">My Reviews</NavLink></li>
+                                    <li className='text-lg mx-4 font-semibold'><NavLink className={({ isActive }) =>
+                                        isActive ? "btn btn-link" : ""
+                                    } to="/add_services">Add Services</NavLink></li>
                                 </>
                                 :
                                 <></>
