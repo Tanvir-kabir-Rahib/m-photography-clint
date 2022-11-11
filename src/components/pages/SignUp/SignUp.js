@@ -88,7 +88,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text text-2xl">Name</span>
                                 </label>
-                                <input type="text" name='name' placeholder="Photo Url" className="input input-bordered" required />
+                                <input type="text" name='name' placeholder="Name" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">

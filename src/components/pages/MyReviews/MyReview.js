@@ -32,7 +32,7 @@ const MyReview = ({ review, handleDelete, handleUpdate }) => {
                             <h2 className="card-title">Review</h2>
                             <p>{review.userReview}</p>
                         </div>
-                        <div className='flex justify-between'>
+                        <div className='flex justify-evenly'>
                             <label htmlFor="my-modal" className="btn btn-outline btn-warning"><FaPen className='mr-1'></FaPen> Edit</label>
                             <button className="btn btn-outline btn-error" onClick={() => handleDelete(review._id)}><FaTrash className='mr-1'></FaTrash> Delete</button>
                         </div>
