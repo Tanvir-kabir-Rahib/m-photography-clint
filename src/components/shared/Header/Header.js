@@ -10,8 +10,10 @@ const Header = () => {
     const { logOut, user } = useContext(AuthContext)
     const handleLogout = () => {
         logOut()
-            .then(
-                toast.success("Successfully Loged Out.")
+            .then(() =>{
+                localStorage.removeItem("jw-token");
+                toast.success("Successfully Loged Out.");
+            }
             )
             .catch()
     }
