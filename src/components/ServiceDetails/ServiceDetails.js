@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Review from './Review/Review';
@@ -12,7 +13,41 @@ const ServiceDetails = () => {
         fetch(`https://m-photo-server.vercel.app/reviews/${serviceData._id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
-    }, [serviceData._id])
+    }, [])
+
+    const handleReview = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = user?.email || 'unregistered';
+        const photoUrl = form.photoURL.value;
+        const userReview = form.userReview.value;
+        const review = {
+            serviceId: serviceData._id,
+            user: name,
+            email,
+            photoUrl,
+            userReview
+        }
+
+        fetch('https://m-photo-server.vercel.app/add_review', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(review)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data.acknowledged){
+                    toast.success('Review Added successfully')
+                    form.reset();
+                    
+                }
+            })
+            .catch(err => console.error(err));
+
+    }
     return (
         <div className='my-24'>
             <div className="card w-11/12 lg:w-3/4 lg:card-side bg-neutral shadow-xl mx-auto py-16 lg:p-16 my-12">
@@ -40,7 +75,7 @@ const ServiceDetails = () => {
                 {
                     user?.email ?
                         <>
-                            <form>
+                            <form onSubmit={handleReview}>
                                 <div className='block md:flex w-full justify-between'>
                                     <div className="form-control w-full md:w-1/2 mr-0 md:mr-2 lg:mr-4">
                                         <label className="label">
@@ -67,8 +102,8 @@ const ServiceDetails = () => {
                                     </label>
                                     <textarea className="textarea textarea-bordered h-24" name='userReview' placeholder="Your Review"></textarea>
                                 </div>
-                                <div className="mt-6 text-center">
-                                    <button className="btn btn-primary px-24" type='submit'>Submit</button>
+                                <div className="form-control my-12">
+                                    <input className="btn btn-primary" type='submit'></input>
                                 </div>
                             </form>
                         </>
