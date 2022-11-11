@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 import Review from './Review/Review';
 
 const ServiceDetails = () => {
     const serviceData = useLoaderData()
+    const location = useLocation()
+    const { user } = useContext(AuthContext)
     const [reviews, setReviews] = useState([])
     useEffect(() => {
         fetch(`https://m-photo-server.vercel.app/reviews/${serviceData._id}`)
@@ -33,12 +36,50 @@ const ServiceDetails = () => {
                         </>
                 }
             </div>
-            <div className='w-11/12 lg:w-3/4 my-12 mx-auto'>
-                <div className="card-actions justify-center">
-                    <button className="btn btn-primary px-12 font-bold">Add Review</button>
-                </div>
+            <div className='w-11/12 lg:w-3/4 mb-12 mx-auto'>
+                {
+                    user?.email ?
+                        <>
+                            <form>
+                                <div className='block md:flex w-full justify-between'>
+                                    <div className="form-control w-full md:w-1/2 mr-0 md:mr-2 lg:mr-4">
+                                        <label className="label">
+                                            <span className="label-text text-2xl">Name</span>
+                                        </label>
+                                        <input type="text" defaultValue={user?.displayName} name='name' placeholder="Photo Url" className="input input-bordered" />
+                                    </div>
+                                    <div className="form-control w-full md:w-1/2  ml-0 md:ml-2 lg:ml-4">
+                                        <label className="label">
+                                            <span className="label-text text-2xl">Email</span>
+                                        </label>
+                                        <input type="email" defaultValue={user?.email} name='email' placeholder="email" className="input input-bordered" readOnly />
+                                    </div>
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-2xl">Photo Url</span>
+                                    </label>
+                                    <input type="text" defaultValue={user?.photoURL} name='photoURL' placeholder="Photo Url" className="input input-bordered" />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                    <span className="label-text text-2xl">Your Review</span>
+                                    </label>
+                                    <textarea className="textarea textarea-bordered h-24" name='userReview' placeholder="Your Review"></textarea>
+                                </div>
+                                <div className="mt-6 text-center">
+                                    <button className="btn btn-primary px-24" type='submit'>Submit</button>
+                                </div>
+                            </form>
+                        </>
+                        :
+                        <div className="card-actions justify-center">
+                            <Link to='/login' state={{ from: location }} replace><button className="btn btn-primary px-12 font-bold">Please Login To Add Review</button></Link>
+                        </div>
+                }
+
             </div>
-        </div>
+        </div >
     );
 };
 
