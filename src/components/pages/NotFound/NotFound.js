@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import img404 from '../../../assets/pictures/404-error-img4.png';
+import useTitle from '../../../useTitle/useTitle';
 const NotFound = () => {
+    useTitle('Not Found')
     return (
         <div className='my-12'>
             <div>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import useTitle from '../../../useTitle/useTitle';
 import ServiceCard from '../../shared/ServiceCard/ServiceCard';
 
 const AllServices = () => {
+    useTitle('All Services')
     const [services, setServices] = useState([])
     useEffect(() => {
         fetch('https://m-photo-server.vercel.app/all_services')

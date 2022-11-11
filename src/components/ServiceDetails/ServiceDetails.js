@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useTitle from '../../useTitle/useTitle';
 import Review from './Review/Review';
 
 const ServiceDetails = () => {
@@ -11,9 +12,10 @@ const ServiceDetails = () => {
     const [reviews, setReviews] = useState([])
     useEffect(() => {
         fetch(`https://m-photo-server.vercel.app/reviews/${serviceData._id}`)
-            .then(res => res.json())
-            .then(data => setReviews(data))
+        .then(res => res.json())
+        .then(data => setReviews(data))
     }, [serviceData._id])
+    useTitle('Service Details', serviceData._id)
 
     const handleReview = event => {
         event.preventDefault();

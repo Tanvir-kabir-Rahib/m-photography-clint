@@ -3,8 +3,10 @@ import toast from 'react-hot-toast';
 import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useTitle from '../../../useTitle/useTitle';
 
 const Login = () => {
+    useTitle('Login')
     const { login, googleLogin } = useContext(AuthContext)
     const [err, setErr] = useState(null)
     const location = useLocation();
