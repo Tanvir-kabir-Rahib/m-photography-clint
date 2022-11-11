@@ -1,6 +1,6 @@
 # Mohammad's Photography
 
-Live Site of [Mohammad's Photography].(https://m-photography.web.app/) or [https://m-photography.web.app/]
+Live Site of [Mohammad's Photography](https://m-photography.web.app/) or [https://m-photography.web.app/].
 
 ## Description
 
