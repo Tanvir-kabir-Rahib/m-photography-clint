@@ -13,7 +13,7 @@ const ServiceDetails = () => {
         fetch(`https://m-photo-server.vercel.app/reviews/${serviceData._id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
-    }, [])
+    }, [serviceData._id])
 
     const handleReview = event => {
         event.preventDefault();
