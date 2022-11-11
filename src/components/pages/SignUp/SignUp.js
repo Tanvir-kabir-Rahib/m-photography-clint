@@ -18,10 +18,25 @@ const SignUp = () => {
         const password = form.password.value;
         createUser(email, password)
             .then(result => {
+                const user = result.user;
                 form.reset()
                 handleUpdateUser(name, photoURL)
-                toast.success("Successfully Signed Up.")
-                navigate("/")
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('https://m-photo-server.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('jw-token', data.token);
+                        toast.success("Successfully Loged In.")
+                        navigate('/');
+                    });
             })
             .catch(error => setErr(error.message))
     }
@@ -37,8 +52,23 @@ const SignUp = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
-                toast.success("Successfully Signed Up.")
-                navigate("/")
+                const user = result.user
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('https://m-photo-server.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('jw-token', data.token);
+                        toast.success("Successfully Loged In.")
+                        navigate('/');
+                    });
             })
             .catch(error => setErr(error.message))
     }
@@ -51,30 +81,30 @@ const SignUp = () => {
                 </div>
                 <div className="card shadow-2xl w-1/2">
                     <div className="card-body">
-                        <form  onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-2xl">Name</span>
                                 </label>
-                                <input type="text" name='name' placeholder="Photo Url" className="input input-bordered" required/>
+                                <input type="text" name='name' placeholder="Photo Url" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-2xl">Photo Url</span>
                                 </label>
-                                <input type="text" name='photoURL' placeholder="Photo Url" className="input input-bordered" required/>
+                                <input type="text" name='photoURL' placeholder="Photo Url" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-2xl">Email</span>
                                 </label>
-                                <input type="email" name='email' placeholder="email" className="input input-bordered" required/>
+                                <input type="email" name='email' placeholder="email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-2xl">Password</span>
                                 </label>
-                                <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
+                                <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                                 <label className={err ? "label text-red-700" : "hidden"}>
                                     {err}
                                 </label>

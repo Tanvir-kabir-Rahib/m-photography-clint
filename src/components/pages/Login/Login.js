@@ -18,20 +18,49 @@ const Login = () => {
         const password = form.password.value;
         login(email, password)
             .then(result => {
-                console.log(result.user)
+                const user = result.user
                 form.reset()
-                toast.success("Successfully Loged In.")
-                navigate(from, { replace: true })
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('https://m-photo-server.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('jw-token', data.token);
+                        toast.success("Successfully Loged In.")
+                        navigate(from, { replace: true });
+                    });
             })
             .catch(error => setErr(error.message))
     }
 
     const handleGoogleLogin = () => {
         googleLogin()
-            .then(result => {
-                toast.success("Successfully Loged In.")
-                navigate(from, { replace: true })
+        .then(result => {
+            const user = result.user
+            const currentUser = {
+                email: user.email
+            }
+            fetch('https://m-photo-server.vercel.app/jwt', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(currentUser)
             })
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem('jw-token', data.token);
+                    toast.success("Successfully Loged In.")
+                    navigate(from, { replace: true });
+                });
+        })
             .catch(error => setErr(error.message))
     }
     return (
@@ -48,13 +77,13 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text text-2xl">Email</span>
                                 </label>
-                                <input type="email" name='email' placeholder="email" className="input input-bordered" required/>
+                                <input type="email" name='email' placeholder="email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text text-2xl">Password</span>
                                 </label>
-                                <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
+                                <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                                 <label className={err ? "label text-red-700" : "hidden"}>
                                     {err}
                                 </label>
