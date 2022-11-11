@@ -14,14 +14,14 @@ const AboutMe = () => {
                         <hr className='my-6' />
                         <div className='lg:flex my-6'>
                             <div className='mb-12 lg:mb-0 lg:mr-32'>
-                                <h2 className='text-stone-400 text-3xl font-mono my-3'>services</h2>
+                                <h2 className='text-stone-400 text-3xl font-semibold font-mono my-3'>services</h2>
                                 <p className='text-stone-400 font-mono my-2'>Fashion Photography</p>
                                 <p className='text-stone-400 font-mono my-2'>Wedding Photography</p>
                                 <p className='text-stone-400 font-mono my-2'>Commercial Shooting</p>
                                 <p className='text-stone-400 font-mono my-2'>Photo Studio</p>
                             </div>
                             <div>
-                                <h2 className='text-stone-400 text-3xl font-mono my-3'>awards</h2>
+                                <h2 className='text-stone-400 text-3xl font-semibold font-mono my-3'>awards</h2>
                                 <p className='text-stone-400 font-mono my-2'>The National Geographic Photo Contest</p>
                                 <p className='text-stone-400 font-mono my-2'>Sony World Photography</p>
                                 <p className='text-stone-400 font-mono my-2'>Monovisions Photography</p>
