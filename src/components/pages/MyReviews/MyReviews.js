@@ -43,12 +43,13 @@ const MyReviews = () => {
     }
 
     const handleUpdate = (id, edited) => {
-        fetch(`https://m-photo-server.vercel.app/reviews/${id}`, {
+        console.log(id, edited)
+        fetch(`http://localhost:4000/reviews/${id}`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(edited)
+            body: JSON.stringify({content: edited})
         })
             .then(res => res.json())
             .then(data => {

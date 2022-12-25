@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaPen, FaTrash } from 'react-icons/fa';
 
 const MyReview = ({ review, handleDelete, handleUpdate }) => {
-    const [myReview, setmyReview] = useState({})
-    useEffect(() => {
-        fetch(`https://m-photo-server.vercel.app/my_reviews/${review?._id}`)
-            .then(res => res.json())
-            .then(data => setmyReview(data));
-    }, [review._id])
+    const [myReview, setMyReview] = useState()
+    useEffect( () => {
+        fetch(`http://localhost:4000/my_reviews/${review._id}`)
+        .then(res => res.json())
+        .then(data => setMyReview(data))
+    },[review._id])
+    const editedValue = useRef()
     const handleEdit = (event) => {
-        const editedText = event.target.value;
-        handleUpdate(editedText)
+        const editedText = editedValue.current.value;
+        handleUpdate(review?._id, editedText)
     }
     return (
         <div>
@@ -40,7 +41,7 @@ const MyReview = ({ review, handleDelete, handleUpdate }) => {
                         <div className="modal">
                             <div className="modal-box">
                                 <h3 className="font-bold text-lg mb-4">Your Review</h3>
-                                <textarea className="textarea textarea-bordered h-24 w-full" name='userReview' defaultValue={myReview?.userReview}></textarea>
+                                <textarea className="textarea textarea-bordered h-24 w-full" ref={editedValue} name='userReview' defaultValue={myReview?.userReview}></textarea>
                                 <div className="modal-action">
                                     <label onClick={handleEdit} htmlFor="my-modal" className="btn btn-outline btn-primary">Done</label>
                                 </div>
